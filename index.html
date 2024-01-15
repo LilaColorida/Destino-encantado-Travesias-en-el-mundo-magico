@@ -1,0 +1,131 @@
+<style>
+    #game {
+    width:1000px;
+    height:600px;
+    background-image: url(ROOM2.jpg);
+    margin: 0 auto
+}
+
+.characters {
+    width:496px;
+    height:416px;
+    display:inline-block;
+}
+
+#character1 {
+    background-image: url(avatar-oc.png);
+    background-size: 100%;
+}
+
+#character2 {
+    background-image: url(avatar-jg.png);
+    background-size: 100%;
+}
+
+#dialog {
+    height:100px;
+    margin-top: 8px;
+    margin-left: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+
+    padding: 20px;
+    font-size: 25px;
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 20px;
+}
+
+#final {
+    display: none;
+    max-height: 600px;
+    margin: 0 auto;
+}
+</style>
+
+<div id="game">
+<div class="characters" id="character1">
+    .
+</div>
+<div class="characters" id="character2">
+    .
+</div>
+<div id="dialog" onclick="nextComment()">
+    (Click para empezar)
+</div>
+</div>
+
+<img id="final" src="IMG-FINAL1.jpeg" alt="Kai se animó a cantar en el concierto junto a Sayumi.">
+
+<script>
+
+const comments = [
+"Estaba durmiendo plácidamente cuando un ruido me despertó. Era mi despertador, que sonaba con una melodía estridente.",
+"<b>Sayumi</b>: ¡Ugh, qué fastidio!",
+"Me quejé, apagando el despertador.",
+"Me tapé la cabeza con la almohada, intentando volver a dormir a pesar de seguir sintiendo la suave luz del amanecer filtrándose por entre las cortinas. Pero entonces, oí otro ruido más molesto aún.",
+"<b>Jughead</b>: ¡Sayumi, levántate! ¡Vamos a perder el tren! - gritó una voz masculina tirando de la sábana que me cubría.",
+"Reconocí al toque la voz, era la de mi queridísimo hermano mayor, Jughead, que entraba en mi habitación sin llamar.", 
+"Él era alto y delgado, con el pelo negro y los ojos verdes además era un estudiante de sexto año en Hogwarts, la escuela de magia y hechicería más famosa del mundo mágico.", 
+"Yo, por el contrario, había estudiado hasta ahora en Beauxbatons, una academia mágica situada en Francia. Pero mi madre había decidido que era hora de que tenía que cambiarme a Hogwarts, para estar más cerca de mis hermanos y evitar los problemas que había tenido en mi antigua escuela.",
+"Me resistí a levantarme y me aferré a la sábana, como si esa fuera mi salvación.",
+"<b>Sayumi</b>: ¡Déjame en paz!",
+"Protesté, con voz ronca volviéndome a tapar con las sábanas.",
+"<b>Sayumi</b>: ¡No quiero ir a ese aburrido lugar!",
+"<b>Jughead</b>: No seas dramática",
+"Dijo a la vez que soltaba la sábana.",
+"<b>Jughead</b>: Ese lugar aburrido que dices es Hogwarts, la mejor escuela de magia y hechicería de todo el mundo mágico. Y tú vas a ser una alumna de allí, como yo.",
+"Me froté los ojos y me senté en la cama. Todavía estaba medio dormida y no tenía muchas ganas de levantarme.",
+"<b>Sayumi</b>: (fruncía el ceño) No entiendo por qué tengo que ir a Hogwarts.",
+"<b>Sayumi</b>: Yo estaba muy bien en Beauxbatons. Allí tenía amigos, profesores y un ambiente agradable.",
+"<b>Jughead</b>: ¿Amigos? ¿Qué amigos?",
+"Sé cuándo Jughead habla con sarcasmo y esta era una de esas veces.",
+"<b>Jughead</b>: ¿Esos chicos que te seguían como perritos falderos? ¿Esos profesores que te consentían todo? ¿Ese ambiente agradable que creabas con tus travesuras?",
+"<b>Sayumi</b>: Mis travesuras eran divertidas (dije, sonriendo)",
+"<b>Sayumi</b>: Y no hacían daño a nadie. Bueno, quizás a algunas personas, pero se lo merecían.",
+"<b>Jughead</b>: (rodando los ojos) Se lo merecían, claro.",
+"<b>Jughead</b>: Como esa vez que le pusiste un hechizo a la comida de la directora y la hiciste vomitar arcoíris. O esa vez que le cambiaste el color del pelo a la jefa de tu casa y la dejaste calva. O esa vez que le llenaste el baño de ranas a la chica más popular de la escuela.",
+"<b>Sayumi</b>: (orgullosa) Esas fueron mis mejores obras.",
+"<b>Sayumi</b>: Y no me arrepiento de nada.",
+"<b>Jughead</b>: Pues deberías.",
+"<b>Jughead</b>: (mirándome serio) Porque por culpa de tus bromas, casi te expulsan de Beauxbatons. Y si no fuera por mamá, que habló con el director y le rogó que te diera otra oportunidad, ahora estarías sin escuela y sin futuro.",
+"<b>Sayumi</b>: (me encogí de hombros) Mamá exagera.",
+"<b>Sayumi</b>: No es para tanto. Solo soy una chica que le gusta divertirse y hacer reír a los demás. Además, esas chicas se lo merecían.",
+"<b>Sayumi</b>: (me defendí) Eran unas creídas y unas fresas. Se creían superiores por ser francesas y por tener unos uniformes tan elegantes. Yo solo les enseñé una lección.",
+"<b>Jughead</b>: Una lección que te costó casi una expulsión.",
+"<b>Jughead</b>: (mirándome con reproche) Por suerte, mamá pudo convencer al director de que te diera otra oportunidad, pero con la condición de que te cambiaras de escuela y por eso, mamá ha decidido que te vengas a Hogwarts, donde yo pueda vigilarte y corregirte.",
+"Cuando le escuché decir eso lo vi a los ojos sorprendida e indignada.",
+"<b>Sayumi</b>: ¿Vigilarme y corregirme? ¿Quién dijo que necesito un guardián Slytherin?",
+"<b>Sayumi</b>: (indignada) ¿Qué te crees, mi padre?",
+"El tema de mi padre era un tema delicado en la familia, en especial para mí, nadie a excepto de mis hermanos y mi madre sabemos la verdadera identidad de mi padre.",
+"Pero mamá decidió que por nuestra seguridad no deberíamos hacer ver a la sociedad que tenemos algún vínculo con él, por eso tenemos el apellido de nuestra madre.",
+"Siempre que nos preguntaban sobre quien era nuestro padre teníamos que mentir diciendo que nos abandonó cuando éramos muy pequeños y no tenemos recuerdos de él.",
+"Para mí era más difícil ya que tenía muy pocos recuerdos con él y esos pocos recuerdos se estaban borrando con el paso del tiempo, pero intentaba aferrarme a ellos.",
+"En ese aspecto envidiaba mucho a Jughead y a Cheryl porque ellos sí pudieron compartir más tiempo y tener más recuerdos con él antes de que lo sacaran de nuestras vidas.",
+"<b>Jughead</b>: (su voz era autoritario) No, tu hermano mayor. Y como tal, te digo que te levantes, te vistas y me sigas.",
+"<b>Jughead</b>: (suavizó un poco su voz) Tenemos que ir a la estación a coger el tren. Además, mamá dijo que te asegurara de no perder el tren. Y no quiero que llegues tarde a tu primer día en Hogwarts.",
+"<b>Sayumi</b>: (con sarcasmo) Oh, venga. ¿Acaso piensas que no puedo cuidar de mí misma en ese lugar lleno de magia?",
+"<b>Jughead</b>: (mirándola con reproche) Después de lo que pasó en Beauxbatons, no estoy tan seguro.",
+"<b>Sayumi</b>: (rodando los ojos) ¡Ya voy, ya voy!",
+"<b>Jughead</b>: ¡No, no vas! ¡Llevas diciendo eso media hora! ¡Apúrate o te dejo aquí!",
+"Me insistió Jughead se veía claramente impaciente y cuando se ponía así se ponía más insoportable de lo que podría imaginar.",
+"<b>Sayumi</b>: (suspiró y me levantó de mala gana) Está bien, me alistaré.",
+"Jughead sonrió triunfante saliendo de la habitación mientras Sayumi se levantaba y comenzaba a prepararse para su primer día en Hogwarts.",
+"Cuando iba a mi armario para cambiarme vi el marco de una foto que estaba en mi mesita de noche, era una donde Jughead y yo habíamos ido a un concierto juntos",
+"Recuerdo que al principio Jughead no tenía ganas de ir, pero al final accedió, ese día la pasamos muy bien juntos. Agarré la foto con una sonrisa en el rostro al recordarlo y la puse en mi maleta."
+];
+
+let commentIndex = 0;
+
+function nextComment() {
+    document.getElementById('dialog').innerHTML = comments[commentIndex]
+
+    commentIndex = commentIndex + 1;
+
+if (commentIndex > comments.length) {
+    document.getElementById('game').style.display = 'none'; // Ocultar el juego
+    document.getElementById('final').style.display = 'block'; // Mostrar la imagen
+
+} 
+}
+
+</script>
